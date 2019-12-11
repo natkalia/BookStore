@@ -38,7 +38,8 @@ const bookSchema = new mongoose.Schema({
     },
     reviewsList: [{ 
         user: {
-            type: userSchema
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
         },
         body: {
             type: String,
@@ -94,7 +95,7 @@ function validateBook(book) {
             .max(5),
         reviewsList: Joi.array().items(
             Joi.object({
-                author: Joi.array().items(Joi.string()),
+                user: Joi.string(),
                 body: Joi.string().max(200),
                 date: Joi.date(),
                 stars: Joi.Number.validate(1, 2, 3, 4, 5)
