@@ -19,18 +19,16 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: [true, "Category should be added"],
         enum: [
-            "Dramat",
             "Thriller",
-            "Kryminał",
-            "Romans",
-            "Dla dzieci",
-            "Biografia",
-            "Fantastyka",
-            "Poradnik",
-            "Literatura piękna",
-            "Literatura podróżnicza",
-            "Literatura faktu, reportaż",
-            "Literatura obyczajowa"
+            "Crime fiction",
+            "Romance",
+            "For kids",
+            "Biography",
+            "Fantasy",
+            "Handbooks",
+            "Poetry",
+            "Travel",
+            "Non-fiction"
         ]
     },
     publishingYear: {
@@ -73,18 +71,16 @@ function validateBook(book) {
         category: Joi.string
             .required()
             .valid(
-                "Dramat",
                 "Thriller",
-                "Kryminał",
-                "Romans",
-                "Dla dzieci",
-                "Biografia",
-                "Fantastyka",
-                "Poradnik",
-                "Literatura piękna",
-                "Literatura podróżnicza",
-                "Literatura faktu, reportaż",
-                "Literatura obyczajowa"
+                "Crime fiction",
+                "Romance",
+                "For kids",
+                "Biography",
+                "Fantasy",
+                "Handbooks",
+                "Poetry",
+                "Travel",
+                "Non-fiction"
             ),
         publishingYear: Joi.Number
             .required()
