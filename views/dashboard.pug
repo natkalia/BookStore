@@ -1,0 +1,45 @@
+
+//- temporary user object for testing - logged in standard user
+-user = { name: "John Doe", isEditor: false}
+
+if(!user)
+    nav.nav.justify-content-end.align-items-center
+        h1.display-4.logo.flex-grow-1.text-left.p-4 BooksApp
+        ul.nav.justify-content-between.mr-4
+            li.nav-item.border.border-secondary.mr-2
+                a(href='#').nav-link.font-weight-bold Sign in
+            li.nav-item.border.border-secondary.mr-2
+                a(href='#').nav-link.font-weight-bold Register
+    p.text-right.mr-4 Logged-in users can do more!
+
+else if(user.isEditor === false) 
+    nav.nav.justify-content-end.align-items-center
+        h1.display-4.logo.flex-grow-1.text-left.p-4 BooksApp
+        ul.nav.justify-content-between.mr-4
+            li.nav-item.border.border-secondary.mr-2
+                a(href='#').nav-link.font-weight-bold My profile
+            li.nav-item.border.border-secondary.mr-2
+                a(href='#').nav-link.font-weight-bold Sign out
+    p.text-right.mr-4 Hello #{user.name}, you are now logged in as a reader.
+    p.text-right.mr-4 Users with editor's status can add and edit new books! Contact us to ask how to become editor!
+
+else if(user.isEditor === true) 
+    nav.nav.justify-content-end.align-items-center
+        h1.display-4.logo.flex-grow-1.text-left.p-4 BooksApp
+        
+        ul.nav.mr-4
+            li.nav-item.border.border-secondary.mr-2
+                a(href='#').nav-link.font-weight-bold My profile
+            li.nav-item.border.border-secondary.mr-2
+                a(href='#').nav-link.font-weight-bold Sign out
+
+        ul.nav.mr-4
+            li.nav-item.border.border-secondary.mr-2
+                a(href='#').nav-link.font-weight-bold Edit book
+            li.nav-item.border.border-secondary.mr-2
+                a(href='#').nav-link.font-weight-bold Delete book
+            li.nav-item.border.border-secondary.mr-2
+                a(href='#').nav-link.font-weight-bold Add new book
+
+    p.text-right.mr-4 Hello #{user.name}! You are now logged in as an editor!
+    p.text-right.mr-4 Thanks for your editor support!

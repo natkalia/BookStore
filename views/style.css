@@ -1,6 +1,69 @@
 /* --General-- */
 body {
-  background-color: #262626;
+  color: #262626;
   text-align: center;
-  color: #f5f5f5;
+  height: 100vh;
+}
+
+.wrapper {
+  background-image: url(https://images.unsplash.com/photo-1554896541-dff010081afe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: repeat;
+}
+
+.wrapper-inner {
+  background-color: white;
+  margin: 0 auto;
+  width: 1024px;
+}
+
+/* Nav */
+.nav {
+  background-color: white;
+}
+
+.logo {
+  font-family: "Abril Fatface";
+}
+
+.nav-item {
+  font-family: "Open Sans";
+  font-size: 24px;
+}
+
+/* Header */
+header {
+  background-color: lightgrey;
+  position: relative;
+}
+
+div.border {
+  height: 200px;
+  width: 200px;
+  background-color: darkgrey;
+  font-size: 20px;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+}
+
+/* Main */
+.content {
+  min-height: 800px;
+}
+
+.search-books {
+  background-color: #262626;
+  color: white;
+}
+
+.card {
+  width: 16rem;
+  display: inline-block;
+}
+
+/* Footer */
+footer {
+  background-color: darkgrey;
 }
