@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require("joi");
+const { userSchema } = require('.user');
 
 
 const bookSchema = new mongoose.Schema({
@@ -10,7 +11,7 @@ const bookSchema = new mongoose.Schema({
         max: 100
     },
     author: {
-        type: String,
+        type: [String],
         required: [true, "Author should be added"],
         min: 4,
         max: 50
@@ -36,6 +37,9 @@ const bookSchema = new mongoose.Schema({
         required: [true, "Publishing year should be added"]
     },
     reviewsList: [{ 
+        user: {
+            type: userSchema
+        },
         body: {
             type: String,
             maxlength: 200
@@ -64,10 +68,11 @@ function validateBook(book) {
             .required()
             .min(2)
             .max(100),
-        author: Joi.string
+        author: Joi.array().items(Joi.string()
             .required()
             .min(4)
-            .max(50),
+            .max(50)
+            ),
         category: Joi.string
             .required()
             .valid(
@@ -89,6 +94,7 @@ function validateBook(book) {
             .max(5),
         reviewsList: Joi.array().items(
             Joi.object({
+                author: Joi.array().items(Joi.string()),
                 body: Joi.string().max(200),
                 date: Joi.date(),
                 stars: Joi.Number.validate(1, 2, 3, 4, 5)
@@ -100,5 +106,3 @@ function validateBook(book) {
 
 exports.Book = Book;
 exports.validate = validateBook;
-
-//starsy do receczji ipowiązanie użytkownaika
