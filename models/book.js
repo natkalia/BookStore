@@ -10,11 +10,14 @@ const bookSchema = new mongoose.Schema({
         max: 100
     },
     author: {
-        type: [String],
-        required: [true, "Author should be added"],
-        min: 4,
-        max: 50
+        type: [{
+          type: String,
+          required: [true, "Author should be added"],
+          min: 4,
+          max: 50
+      }]
     },
+
     category: {
         type: String,
         required: [true, "Category should be added"],
