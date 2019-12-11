@@ -45,12 +45,17 @@ const bookSchema = new mongoose.Schema({
         date: {
             type: Date,
             default: Date.now
+        },
+        stars: {
+            type: Number,
+            min: 0,
+            max: 5,
+            validate: {
+                validator: Number.isInteger,
+                message: "Stars amount has to be integer"
+            }
         }
-    }],
-    stars: {
-        type: Number,
-        enum: [1, 2, 3, 4, 5]
-    }
+    }]
 });
 
 const Book = mongoose.model('Book', bookSchema);
@@ -83,18 +88,21 @@ function validateBook(book) {
             ),
         publishingYear: Joi.Number
             .required()
-            .integer(),
+            .integer()
+            .min(0)
+            .max(5),
         reviewsList: Joi.array().items(
             Joi.object({
                 body: Joi.string().max(200),
-                date: Joi.date()
+                date: Joi.date(),
+                stars: Joi.Number.validate(1, 2, 3, 4, 5)
             })
-          ),
-        stars: Joi.Number
-            .validate(1, 2, 3, 4, 5)
+        )    
     }
     return Joi.validate(book, schema);
 };
 
 exports.Book = Book;
 exports.validate = validateBook;
+
+//starsy do receczji ipowiązanie użytkownaika
