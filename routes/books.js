@@ -21,4 +21,13 @@ router.get('/:id', async (req, res) => {
   });
 });
 
+//Delete book
+router.delete('/:id', async (req, res) => {
+  const book = await Book.findByIdAndRemove(req.params.id);
+
+  if (!book) return res.status(404).send('The book with the given ID was not found');
+
+  res.send('Success');
+})
+
 module.exports = router;
