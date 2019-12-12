@@ -5,15 +5,16 @@ const morgan = require('morgan');
 const config = require('config');
 const express = require('express');
 const mongoose = require('mongoose');
+const users = require('./routes/users');
 
 const app = express();
 
 const connectionString = `mongodb+srv://${config.get('db.user')}:${config.get('db.password')}@${config.get('db.address')}/${config.get('db.name')}?retryWrites=true&w=majority`;
 
 mongoose.connect(connectionString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => dbDebug('Connected to MongoDB...'))
   .catch((err) => {
     dbDebug('Could not connect to MongoDB.', err.message);
@@ -33,6 +34,8 @@ app.use('/api/users', users); */
 app.get('/', (req, res) => {
   res.render('main');
 });
+
+app.use('/api/users', users);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => basicDebug(`Listening on port ${port}...`));
