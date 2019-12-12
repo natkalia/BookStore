@@ -31,8 +31,9 @@ if (app.get('env') === 'development') {
 app.use('/api/users', users); */
 
 app.get('/', (req, res) => {
-  res.render('main');
+  res.render('main', {name: "Hard-Coded-Indexjs-Name", isEditor: true});
 });
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => basicDebug(`Listening on port ${port}...`));
