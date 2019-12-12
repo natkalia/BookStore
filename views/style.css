@@ -1,8 +1,8 @@
-/* --General-- */
+/* General */
 body {
-  color: #262626;
   text-align: center;
   height: 100vh;
+  font-family: "Proza Libre";
 }
 
 .wrapper {
@@ -13,57 +13,44 @@ body {
 }
 
 .wrapper-inner {
-  background-color: white;
   margin: 0 auto;
   width: 1024px;
 }
 
-/* Nav */
-.nav {
-  background-color: white;
-}
-
+/* Dashboard */
 .logo {
   font-family: "Abril Fatface";
 }
 
+span.badge {
+  font-size: 1.4rem;
+}
+
 .nav-item {
-  font-family: "Open Sans";
-  font-size: 24px;
+  font-size: 2rem;
+}
+
+.nav ~ p {
+  font-size: 1.2rem
 }
 
 /* Header */
 header {
-  background-color: lightgrey;
   position: relative;
 }
 
-div.border {
+div.border.rounded-circle {
   height: 200px;
   width: 200px;
-  background-color: darkgrey;
-  font-size: 20px;
+  font-size: 1.6rem;
   position: absolute;
   top: 50px;
   right: 10px;
 }
 
-/* Main */
-.content {
-  min-height: 800px;
-}
-
-.search-books {
-  background-color: #262626;
-  color: white;
-}
-
+/* Content */
 .card {
-  width: 16rem;
   display: inline-block;
-}
-
-/* Footer */
-footer {
-  background-color: darkgrey;
+  min-width: 46%;
+  min-height: 150px;
 }

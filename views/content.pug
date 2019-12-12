@@ -1,14 +1,12 @@
 section.content
-    div.search-books.py-5
-        input 
-        button.btn.btn-primary.ml-2 Search all books
+
     div.top-ten.p-5
-        h2 Top 10 books!
+        h2 Top 10 books
         div.card-group
             //- waiting for array with 10 books from backend, this is only temporary solution for testing
-            each item in [{ title: "test", author: "test" }, { title: "test", author: "test" }, { title: "test", author: "test" }, { title: "test", author: "test2" }, { title: "test2", author: "test2" }, { title: "test2", author: "test2" }]
+            each item in [ 1,2,3,4,5,6,7,8,9,10]
                 div.card.m-2
                     div.card-header.h5 Book title #{title}
                     div.card-body 
                         p.card-text Author #{author}
-                        a(href="#").btn.btn-primary More...
+                        a(href="#").btn.btn-info More...
