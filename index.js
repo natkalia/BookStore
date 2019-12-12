@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const config = require('config');
 const express = require('express');
 const mongoose = require('mongoose');
+const books = require('./routes/books');
 
 const app = express();
 
@@ -22,13 +23,17 @@ mongoose.connect(connectionString, {
 app.set('view engine', 'pug');
 app.set('views', './views');
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
   basicDebug('Morgan enabled...')
 }
+app.use(express.static('public'));
+app.use('/api/books', books);
 
-/* app.use('/api/books', books);
-app.use('/api/users', users); */
+/*
+app.use('/api/users', users);
+*/
 
 app.get('/', (req, res) => {
   res.render('main', {name: "Hard-Coded-Indexjs-Name", isEditor: true});

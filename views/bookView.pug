@@ -1,0 +1,64 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset=UTF-8)
+    title Books
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Abril+Fatface|Proza+Libre:400,700&display=swap&subset=latin-ext", rel='stylesheet')
+    style
+      include ./style.css
+  body.text-dark
+
+    div.wrapper
+
+      div.wrapper-inner.bg-light
+
+        include ./dashboard.pug
+
+        include ./header.pug
+
+        div.content
+          hr
+          main
+            div.box
+              a.mb-4.mr-2.btn.btn-warning(href='/api/books/edit/'+ book._id) Edit book
+              a.mb-4.btn.btn-danger.deleteBook(href='#', data-id=book._id) Delete book
+              h2= book.title
+              h5.mb-3= book.author
+              p Publiction year: 
+                span= book.publishingYear
+              p Category: 
+                span= book.category
+              p Rating: 
+                span= averageStars
+              p.text-left.mt-4 Book description:
+              p.text-justify= book.description
+            hr
+            div.box
+              h3 Add your comment and rating
+              form(method='POST', action='/api/books/'+ book._id)
+                div.form-group
+                  label Write your comment:
+                  textarea.form-control(name='comment', row='5' placeholder='Enter book comment')
+                div.form-group
+                  label Your rating (from 0 to 5):
+                  input.form-control(name='stars', type='number', min='0', max='5' placeholder='0')            
+                input.btn.btn-primary(type='submit', value='Add comment')
+            hr
+            div.box
+              h3 Readers opinions:
+              each comment, i in book.reviewsList
+                div.card.mb-2.bg-secondary
+                  div.card-header.p-1.text-left= comment.date
+                  div.card-body.row
+                    div.col-8.text-left.border-right
+                      p=comment.comment
+                      p(style='font-weight: bold') User name
+                    div.col-4
+                      p User rating:
+                      p(style='font-size: 24px; font-weight: bold')=comment.stars
+        hr
+        include ./footer.pug
+    script(src='https://code.jquery.com/jquery-3.4.1.min.js')
+    script(src='/main.js')

@@ -54,3 +54,32 @@ div.border.rounded-circle {
   min-width: 46%;
   min-height: 150px;
 }
+
+/* Books styles */
+
+hr {
+  border: 2px solid white;
+}
+
+.box {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.content {
+  min-height: 80vh;
+}
+
+.form-group {
+  width: 80%;
+  margin: 2% auto;
+  text-align: left;
+}
+
+.books {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  color: black;
+}
