@@ -30,4 +30,15 @@ router.delete('/:id', async (req, res) => {
   res.send('Success');
 })
 
+//Edit book form
+router.get('/edit/:id', async (req, res) => {
+  const book = await Book.findById(req.params.id);
+
+  if (!book) return res.status(404).send('The book with the given ID was not found');
+
+  res.render('editBookForm', {
+    book: book
+  })
+})
+
 module.exports = router;
