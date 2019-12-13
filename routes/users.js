@@ -4,6 +4,7 @@ const {
 } = require('../models/user');
 const mongoose = require('mongoose');
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 // Register new user
@@ -18,14 +19,17 @@ router.post('/', async (req, res) => {
   })
   if (user) return res.status(400).send('User already registered');
 
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
   user = new User({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password
+    password: hashedPassword
   });
 
   await user.save();
-  res.render('main', {name: user.name, isEditor: false});
+  res.render('main', {name: user.name, isEditor: user.isEditor});
 })
 
 module.exports = router;
