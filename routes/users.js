@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
   });
 
   await user.save();
-  res.render('main');
+  res.render('main', {name: user.name, isEditor: false});
 })
 
 module.exports = router;
