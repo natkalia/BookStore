@@ -19,8 +19,7 @@ const userSchema = new mongoose.Schema({
       "Not a valid email address"
     ],
     lowercase: true,
-    trim: true,
-    unique: true
+    trim: true
   },
   password: {
     type: String,
@@ -29,10 +28,7 @@ const userSchema = new mongoose.Schema({
     maxlength: 500, // passwords will be stored after hashing so this should be long enough
     trim: true
   },
-  isEditor: {
-    type: Boolean,
-    default: "false"
-  }
+  isEditor: { type: Boolean, default: "false" } 
 });
 
 // Compile schema into model
