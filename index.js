@@ -28,6 +28,11 @@ if (app.get('env') === 'development') {
   basicDebug('Morgan enabled...')
 }
 
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+
 /* app.use('/api/books', books);
 app.use('/api/users', users); */
 
