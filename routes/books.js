@@ -62,7 +62,7 @@ router.get('/', async (req, res) => {
   sortedBooks.sort((a, b) => b.avarageNote - a.avarageNote);
   top10books = sortedBooks.slice(0, 11);
 
-  res.render('top10books', {
+  res.render('main', {
     top10books: top10books
   })
 });
