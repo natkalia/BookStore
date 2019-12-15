@@ -3,7 +3,6 @@ section.content
     div.top-ten.p-5
         h2 Top 10 books
         div.card-group
-            //- waiting for array with 10 books from backend, this is only temporary solution for testing
             each bookItem in top10books
                 div.card.m-2
                     div.card-header.h5 #{bookItem.book.title}
