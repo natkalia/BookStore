@@ -6,6 +6,7 @@ const config = require('config');
 const express = require('express');
 const mongoose = require('mongoose');
 const books = require('./routes/books');
+const users = require('./routes/users')
 
 const app = express();
 
@@ -30,10 +31,7 @@ if (app.get('env') === 'development') {
 }
 app.use(express.static('public'));
 app.use('/api/books', books);
-
-/*
 app.use('/api/users', users);
-*/
 
 app.get('/', (req, res) => {
   res.render('main', {name: "Hard-Coded-Indexjs-Name", isEditor: true});
