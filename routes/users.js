@@ -1,22 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/add', async (req, res) => {
     res.render('users');
   });
 
-router.post('/', (req, res) => {
-
-    if(!req.body.name || req.body.name.length < 3) {
-        //400 Bad Request
-        res.status(400).send('Name is required and should be minimum 3 characters.');
-        return;
-    }
+router.post('/add', async (req, res) => {
+    const { error } = validateUser(req.body)
+  if (error) return res.status(400).send(error.details[0].message);
 
     const user = new User({
         name: req.body.name,
         password: req.body.password,
+        email: req.body.email,
+        isEditor: req.body.isEditor
       });
+      await user.save();
 }); 
 
 router.get('/:name', (req, res) => {
