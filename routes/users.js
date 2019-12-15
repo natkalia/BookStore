@@ -1,10 +1,10 @@
 const {
   User,
   validate
-} = require('../models/user');
-const mongoose = require('mongoose');
-const express = require('express');
-const bcrypt = require('bcryptjs');
+} = require("../models/user");
+const mongoose = require("mongoose");
+const express = require("express");
+const bcrypt = require("bcryptjs");
 const router = express.Router();
 
 // Register new user
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
   });
 
   await user.save();
-  res.render('main', {name: user.name, isEditor: user.isEditor});
+  res.redirect("/");
 })
 
 module.exports = router;
