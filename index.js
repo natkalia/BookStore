@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const config = require('config');
 const express = require('express');
 const mongoose = require('mongoose');
+const top10 = require('./routes/top10');
 const books = require('./routes/books');
 
 const app = express();
@@ -35,10 +36,7 @@ app.use('/api/books', books);
 app.use('/api/users', users);
 */
 
-app.get('/', (req, res) => {
-  res.render('main', {name: "Hard-Coded-Indexjs-Name", isEditor: true});
-});
-
+app.use('/', top10);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => basicDebug(`Listening on port ${port}...`));
