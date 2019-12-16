@@ -1,5 +1,8 @@
+require('dotenv').config();
 const mongoose = require("mongoose");
 const Joi = require("joi");
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 // Create mongoose schema with basic validation what is saved in database
 
@@ -30,6 +33,15 @@ const userSchema = new mongoose.Schema({
   },
   isEditor: { type: Boolean, default: "false" } 
 });
+
+userSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign({
+    _id: this._id,
+    name: this.name,
+    isEditor: this.isEditor
+  }, config.get('jwtPrivateKey'));
+  return token;
+}
 
 // Compile schema into model
 

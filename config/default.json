@@ -1,3 +1,4 @@
 {
-  "name": "BookStore app"
+  "name": "BookStore app",
+  "jwtPrivateKey": ""
 }
