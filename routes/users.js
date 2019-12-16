@@ -8,9 +8,10 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('registration', {
-        errors: ["Test error message 1", "Test error message 2"]
-    });
+  res.render('registration', {
+    errors: ["Test error message 1", "Test error message 2"]
+  });
+})
 
 // Register new user
 router.post('/', async (req, res) => {
