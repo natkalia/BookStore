@@ -18,17 +18,15 @@ html(lang='en')
 
         include ./header.pug
 
-        div.content
-          hr
-          main
+        section.content
+          div.p-5
             h2 We found #{numberOfBooks} matching book(s) based on your search
-            div.books
-              for book in books
-                div.m-4.card
-                  div.card-header= book.author
-                  div.card-body
-                    h5.card-title= book.title
-                    a.btn.btn-primary(href='/api/books/'+ book._id) Read more
-        hr
+            div.card-group
+              each book in books
+                div.card.m-2
+                    div.card-header.h5 #{book.title}
+                    div.card-body 
+                        p.card-text #{book.author}
+                        a(href='/api/books/'+ book._id).btn.btn-info More...
 
         include ./footer.pug

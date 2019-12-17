@@ -4,8 +4,8 @@ header.border.border-secondary.bg-info
     div.d-flex.flex-column.justify-content-center.bg-light.border.rounded-circle
         a(href='/api/books').text-dark Get all books!
     div.search-books.py-5.m-0.bg-dark.d-flex.flex-row.justify-content-center
-        div.form-row.py-2.input-group.justify-content-center    
+        div.form-row.py-2.justify-content-center    
             form(method='POST', action='/api/search')
-                div.input-group-prepend
-                    input.form-control(name="term" type='text' placeholder='Search...')
-                    input.btn.btn-warning(type="submit" value='Search')
+                div.input-group-prepend.input-group-lg
+                    input.form-control(name="term" type='text' placeholder='Search titles/authors...')
+                    input.btn.btn-warning.font-weight-bold(type="submit" value='Search')
