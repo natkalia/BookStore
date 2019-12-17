@@ -37,11 +37,6 @@ app.use(express.static('public'));
 app.use('/api/books', books);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
-
-/*
-app.use('/api/users', users);
-*/
-
 app.use('/', top10);
 
 const port = process.env.PORT || 3000;
