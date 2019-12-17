@@ -64,6 +64,8 @@ const bookSchema = new mongoose.Schema({
     }]
 });
 
+bookSchema.index( { title: "text" } );
+
 const Book = mongoose.model('Book', bookSchema);
 
 function validateBook(book) {
