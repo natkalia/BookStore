@@ -13,6 +13,11 @@ const search = require('./routes/search');
 
 const app = express();
 
+if (!config.get('db.jwtPrivateKey')) {
+  console.error('FATAL ERROR: jwtPrivateKey is not defined');
+  process.exit(1);
+}
+
 const connectionString = `mongodb+srv://${config.get('db.user')}:${config.get('db.password')}@${config.get('db.address')}/${config.get('db.name')}?retryWrites=true&w=majority`;
 
 mongoose.connect(connectionString, {

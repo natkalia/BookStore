@@ -31,7 +31,10 @@ const userSchema = new mongoose.Schema({
     maxlength: 500, // passwords will be stored after hashing so this should be long enough
     trim: true
   },
-  isEditor: { type: Boolean, default: "false" } 
+  isEditor: {
+    type: Boolean,
+    default: "false"
+  }
 });
 
 userSchema.methods.generateAuthToken = function () {
