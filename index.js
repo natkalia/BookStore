@@ -3,6 +3,8 @@ const basicDebug = require('debug')('app:startup');
 const dbDebug = require('debug')('app:db');
 const morgan = require('morgan');
 const config = require('config');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const top10 = require('./routes/top10');
@@ -35,6 +37,8 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+app.use(cors());
+app.use(cookieParser());
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
   basicDebug('Morgan enabled...')

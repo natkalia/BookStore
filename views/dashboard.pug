@@ -20,7 +20,7 @@ else if(isEditor === false)
             li.nav-item.btn.btn-warning.mr-2
                 a(href='#').nav-link.font-weight-bold.text-dark My profile
             li.nav-item.btn.btn-warning.mr-2
-                a(href='#').nav-link.font-weight-bold.text-dark Sign out
+                a(href='/api/users/logout').nav-link.font-weight-bold.text-dark Sign out
     p.text-right.mr-4.mb-0.font-weight-bold Hello #{name}! You are now logged in as a
        span.badge.badge-success.ml-2 Reader
     p.text-right.mr-4.mt-2 Users with Editor's status can edit books. Contact us if you are interested!
@@ -32,7 +32,7 @@ else if(isEditor === true)
             li.nav-item.btn.btn-warning.mr-2
                 a(href='#').nav-link.font-weight-bold.text-dark My profile
             li.nav-item.btn.btn-warning.mr-2
-                a(href='#').nav-link.font-weight-bold.text-dark Sign out
+                a(href='/api/users/logout').nav-link.font-weight-bold.text-dark Sign out
     p.text-right.mr-4.mb-0.font-weight-bold Hello #{name}! You are now logged in as an
        span.badge.badge-success.ml-2 Reader
        span.badge.badge-danger.ml-2 Editor

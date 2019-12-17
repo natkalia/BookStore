@@ -10,8 +10,15 @@ const {
     checkNotAuthenticated
 } = require("../middleware/auth");
 
-router.get('/', checkNotAuthenticated, (req, res) => {
-    res.render('registration');
+router.get('/',
+// checkNotAuthenticated, 
+(req, res) => {
+  res.render('registration');
+})
+
+router.get('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.redirect('/');
 })
 
 // Register new user
@@ -37,9 +44,12 @@ router.post('/', async (req, res) => {
 
     await user.save();
 
-    const token = user.generateAuthToken();
+  const expiration = process.env.DB_ENV === 'testing' ? 100 : 604800000;
+  const token = user.generateAuthToken();
+  console.log('token from user creation:', token);
 
-    res.header('x-auth-token', token).send();
-})
+  res.cookie('token', token);
+  res.redirect('/');
+});
 
 module.exports = router;

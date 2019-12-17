@@ -1,19 +1,29 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const middleDebug = require('debug')('app:middle');
 
-function checkAuthenticated(req, res, next) {
-  const token = req.header('x-auth-token');
-  if (!token) return res.status(401).send('Access denied. No token provided');
+const  checkAuthenticated = async (req, res, next) => {
+  const token = req.cookies.token || null;
+  // if (!token) return res.status(401).send('Access denied. No token provided');
+  middleDebug('token:', token);
 
   try {
-    const decoded = jwt.verify(token, config.get('db.jwtPrivateKey'));
-    //This makes the user awailable with every request
-    req.user = decoded;
-    next();
+    if (!token) {
+      console.log('nie ma tokenu');
+      res.locals.name = '';
+      res.locals.isEditor = false;
+      return next();
+    } else {
+      const decrypt = jwt.verify(token, config.get('db.jwtPrivateKey'));
+      middleDebug('data-from-token', decrypt);
+      res.locals.name = decrypt.name;
+      res.locals.isEditor = decrypt.isEditor;
+      return next();
+    }
   } catch (err) {
-    res.status(400).send('Invalid token.');
+    return res.status(500).json(err.toString());
   }
-}
+};
 
 function checkNotAuthenticated(req, res, next) {
   const token = req.header('x-auth-token');
