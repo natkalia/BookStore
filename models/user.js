@@ -39,7 +39,7 @@ userSchema.methods.generateAuthToken = function () {
     _id: this._id,
     name: this.name,
     isEditor: this.isEditor
-  }, config.get('jwtPrivateKey'));
+  }, config.get('db.jwtPrivateKey'));
   return token;
 }
 

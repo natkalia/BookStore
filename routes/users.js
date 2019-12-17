@@ -38,9 +38,7 @@ router.post('/', async (req, res) => {
 
   const token = user.generateAuthToken();
 
-  res.header('x-auth-token', token);
-  
-  res.redirect("/");
+  res.header('x-auth-token', token).send();
 })
 
 module.exports = router;
