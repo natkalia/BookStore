@@ -1,0 +1,24 @@
+const express = require("express");
+const router = express.Router();
+const { Book } = require("../models/book");
+
+// Search Engine Books
+
+router.post("/", async (req, res) => {
+  const { term } = req.body;
+
+  const numberOfBooks = await Book.countDocuments({ $text: { $search: term } });
+
+  const books = await Book.find({ $text: { $search: term } });
+
+  if (!books) return res.status(404).send("There are no books found");
+
+  console.log(term, numberOfBooks);
+
+  res.render("search", {
+    numberOfBooks: numberOfBooks,
+    books: books
+  });
+});
+
+module.exports = router;
