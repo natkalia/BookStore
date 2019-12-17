@@ -41,6 +41,7 @@ const bookSchema = new mongoose.Schema({
     publishingYear: {
         type: Number,
         max: currentYear,
+        min: 1700,
         required: [true, "Publishing year should be added"]
     },
     reviewsList: [{ 
@@ -50,7 +51,7 @@ const bookSchema = new mongoose.Schema({
         },
         comment: {
             type: String,
-            minlength: 5,
+            minlength: 2,
             maxlength: 200
         }, 
         date: {
@@ -97,14 +98,15 @@ function validateBook(book) {
         publishingYear: Joi.number()
             .required()
             .integer()
-            .max(currentYear), 
+            .max(currentYear)
+            .min(1700),
     }
     return Joi.validate(book, schema);
 };
 
 function validateComment(book) {
     const schema = {
-        comment: Joi.string().max(200).min(5).required(),
+        comment: Joi.string().max(200).min(2).required(),
         stars: Joi.number().min(0).max(5).integer().required()
     }
     return Joi.validate(book, schema);
