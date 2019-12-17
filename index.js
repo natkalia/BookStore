@@ -9,6 +9,7 @@ const top10 = require('./routes/top10');
 const books = require('./routes/books');
 const auth = require('./routes/auth');
 const users = require('./routes/users');
+const search = require('./routes/search');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(express.static('public'));
 app.use('/api/books', books);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
+app.use('/api/search', search);
 app.use('/', top10);
 
 const port = process.env.PORT || 3000;
