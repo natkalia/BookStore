@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 
     await user.save();
 
-  const expiration = process.env.DB_ENV === 'testing' ? 100 : 604800000;
+  // const expiration = process.env.DB_ENV === 'testing' ? 100 : 604800000;
   const token = user.generateAuthToken();
   console.log('token from user creation:', token);
 

@@ -1,6 +1,6 @@
 //- variables transferred from index.js
-#{name}
-#{isEditor}
+//- #{name}
+//- #{isEditor}
 
 if(!name)
     nav.nav.justify-content-end.align-items-center
@@ -34,6 +34,5 @@ else if(isEditor === true)
             li.nav-item.btn.btn-warning.mr-2
                 a(href='/api/users/logout').nav-link.font-weight-bold.text-dark Sign out
     p.text-right.mr-4.mb-0.font-weight-bold Hello #{name}! You are now logged in as an
-       span.badge.badge-success.ml-2 Reader
        span.badge.badge-danger.ml-2 Editor
     p.text-right.mr-4.mt-2 Thanks for your support to the BooksApp community!
