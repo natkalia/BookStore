@@ -157,10 +157,25 @@ hr {
   margin: 0 auto;
 }
 
+.box.book-details {
+  width: 80%;
+}
+
+@media screen and (min-width: 768px) {
+  .box.book-details {
+    width: 12rem;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .box {
     width: 60%;
   }
+}
+
+.book-details p {
+  display: flex;
+  justify-content: space-between;
 }
 
 .content {
