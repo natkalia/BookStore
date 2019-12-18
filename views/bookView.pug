@@ -9,6 +9,7 @@ html(lang="en")
       include includes/header.pug
 
       .content
+        != messages('messages', locals)
         hr
         main
           .box
@@ -17,7 +18,7 @@ html(lang="en")
             h2.bg-info.text-white.py-3= book.title
             h5.mb-5= book.author
             .box.book-details.text-left
-              p Publiction year:
+              p Publication year:
                 span= book.publishingYear
               p Category:
                 span= book.category
@@ -46,7 +47,7 @@ html(lang="en")
                   .card-body.row
                     .col-8.text-left.border-right
                       p.font-italic= comment.comment
-                      p.font-weight-bold User name
+                      p.font-weight-bold Anonymous user
                     .col-4
                       p User rating:
                       p.font-weight-bold(style="font-size: 24px")= comment.stars

@@ -8,6 +8,7 @@ html(lang="en")
       include includes/header.pug
 
       .content
+        != messages('messages', locals)
         hr
         main.box
           h2.bg-info.text-white.py-3.mb-5 Add book

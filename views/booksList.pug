@@ -9,6 +9,7 @@ html(lang='en')
       include includes/header.pug
 
       div.content
+        != messages('messages', locals)
         main.px-3.py-5
           .box
             h2.bg-info.text-white.py-3.mb-5 Books list
