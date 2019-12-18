@@ -3,7 +3,7 @@
 ![Status: In progress](https://img.shields.io/badge/status-in%20progress-blueViolet)
 ![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)
 
-**Check demo** at :sparkles: [adress to live version](https://bookstore-seven.herokuapp.com/) and **source code** at :house: [GitHub project homepage](https://github.com/dobrzyckahanna/BookStore)
+**Check demo** at :sparkles: [Heroku](https://bookstore-seven.herokuapp.com/) and **source code** at :house: [GitHub project homepage](https://github.com/dobrzyckahanna/BookStore)
 
 This app was created as a part of the CodersCamp project (2019, Warsaw group) - fourth project - backend JavaScript, introduction to Node.js.
 
@@ -11,7 +11,7 @@ We created an app (with books database) in which you are able to add / edit / de
 
 ## :blue_book: Getting Started
 ### Prerequisites
-To run project on your local machine for development and testing purposes you need to install the fallowing software:
+To run project on your local machine for development and testing purposes you need to install the following software:
 * [node.js](https://nodejs.org/en/) & [npm](https://www.npmjs.com/get-npm)
 * [MongoDB](https://www.mongodb.com/what-is-mongodb)
 
@@ -66,13 +66,16 @@ npm start
 * errors handling: connect-flash, express-messages, express-session
 
 ### Main features:
+* MongoDB Atlas cloud database handling
+* debug with use morgan & debugger package
 * CRUD for books
 * user registration and login (authentication)
 * editor with additional permissions (authorization)
-* form handling (book: add & edit, user: registration & login)
+* form handling (book: add, edit, add rate & review, user: registration & login)
 * delete book handling
 * top 10 books (key: descending ratings)
 * search engine (key: author or book title)
+* heroku deployment
 
 ## :busts_in_silhouette: Authors
 * **adamsobiesak** - check at [Github](https://github.com/adamsobiesak)
