@@ -54,16 +54,24 @@ router.get('/:id', async (req, res) => {
 });
 
 //Delete book
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', checkAuthenticated, async (req, res) => {
+  const { isEditor } = res.locals;
+  console.log('from delete book editor state:', isEditor);
+
+  if (!isEditor) return res.status(401).send('Only editor can do that!');
+    
   const book = await Book.findByIdAndRemove(req.params.id);
+  if (!book) return res.status(404).send('The book with the given ID was not found'); 
 
-  if (!book) return res.status(404).send('The book with the given ID was not found');
-
-  res.send('Success');
+  res.send('Success. You delete the book.');
 })
 
 //Edit book form
-router.get('/edit/:id', async (req, res) => {
+router.get('/edit/:id', checkAuthenticated, async (req, res) => {
+  const { isEditor } = res.locals;
+
+  if (!isEditor) return res.status(401).send('Only editor can do that!');
+
   const book = await Book.findById(req.params.id);
 
   if (!book) return res.status(404).send('The book with the given ID was not found');
