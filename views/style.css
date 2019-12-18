@@ -163,7 +163,7 @@ hr {
 
 @media screen and (min-width: 768px) {
   .box.book-details {
-    width: 12rem;
+    width: 13rem;
   }
 }
 
@@ -176,6 +176,10 @@ hr {
 .book-details p {
   display: flex;
   justify-content: space-between;
+}
+
+.book-details p span {
+  text-align: right;
 }
 
 .content {
