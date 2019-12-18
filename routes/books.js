@@ -140,8 +140,8 @@ router.post('/:id', checkAuthenticated, async (req, res) => {
   const { error } = validateComment(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const dateNow = new Date().toISOString().slice(0, 10);
-  const timeNow = new Date().toISOString().slice(11, 16);
+  const dateNow = new Date().toLocaleDateString();
+  const timeNow = new Date().toLocaleTimeString();
 
   book.reviewsList.unshift({
     comment: req.body.comment,
