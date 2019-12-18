@@ -2,11 +2,20 @@ const express = require('express');
 const router = express.Router();
 const { Book, validateBook, validateComment } = require('../models/book');
 const { checkAuthenticated } = require('../middleware/auth');
-const mongoose = require('mongoose');
+const { checkEditor } = require('../middleware/editor');
 
 // Book add form
-router.get('/add', async (req, res) => {
-  res.render('addBookForm');
+router.get('/add', checkAuthenticated, checkEditor, async (req, res) => {
+
+  console.log('name from middleware', res.locals.name);
+  console.log('editor from middleware', res.locals.isEditor);
+  const { name, isEditor, user } = res.locals;
+
+  res.render('addBookForm', {
+    name: name,
+    isEditor: isEditor, 
+    user: user
+  });
 });
 
 // Add book
@@ -27,16 +36,23 @@ router.post('/add', async (req, res) => {
 });
 
 // Books list
-router.get('/', async (req, res) => {
+router.get('/', checkAuthenticated, async (req, res) => {
   const books = await Book.find().sort('title');
 
+  console.log('name from middleware', res.locals.name);
+  console.log('editor from middleware', res.locals.isEditor);
+  const { name, isEditor, user } = res.locals;
+
   res.render('booksList', {
-    books: books
+    books: books,
+    name: name,
+    isEditor: isEditor, 
+    user: user
   });
 });
 
 //Book view
-router.get('/:id', async (req, res) => {
+router.get('/:id', checkAuthenticated, async (req, res) => {
   const book = await Book.findById(req.params.id);
   if (!book) return res.status(404).send('The book with the given ID was not found');
 
@@ -47,18 +63,25 @@ router.get('/:id', async (req, res) => {
   const calculation = (sum / book.reviewsList.length).toFixed(2);
   const averageStars = isNaN(calculation) ? 'Waiting for your comment' : calculation;
 
+  console.log('name from middleware', res.locals.name);
+  console.log('editor from middleware', res.locals.isEditor);
+  const { name, isEditor, user } = res.locals;
+
   res.render('bookView', {
     book: book,
-    averageStars: averageStars
+    averageStars: averageStars,
+    name: name,
+    isEditor: isEditor, 
+    user: user
   });
 });
 
 //Delete book
 router.delete('/:id', checkAuthenticated, async (req, res) => {
-  const { isEditor } = res.locals;
-  console.log('from delete book editor state:', isEditor);
+  // const { isEditor } = res.locals;
+  // console.log('from delete book editor state:', isEditor);
 
-  if (!isEditor) return res.status(401).send('Only editor can do that!');
+  // if (!isEditor) return res.status(401).send('Only editor can do that!');
     
   const book = await Book.findByIdAndRemove(req.params.id);
   if (!book) return res.status(404).send('The book with the given ID was not found'); 
@@ -68,9 +91,8 @@ router.delete('/:id', checkAuthenticated, async (req, res) => {
 
 //Edit book form
 router.get('/edit/:id', checkAuthenticated, async (req, res) => {
-  const { isEditor } = res.locals;
-
-  if (!isEditor) return res.status(401).send('Only editor can do that!');
+  // const { isEditor } = res.locals;
+  // if (!isEditor) return res.status(401).send('Only editor can do that!');
 
   const book = await Book.findById(req.params.id);
 
