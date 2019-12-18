@@ -27,7 +27,7 @@ const  checkAuthenticated = async (req, res, next) => {
 };
 
 function checkNotAuthenticated(req, res, next) {
-  const token = req.header('x-auth-token');
+  const token = req.cookies.token || null;
   if (token) {
     return res.redirect('/');
   }

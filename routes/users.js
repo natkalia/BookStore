@@ -12,7 +12,7 @@ const {
 
 
 router.get('/',
-// checkNotAuthenticated, 
+  checkNotAuthenticated, 
 (req, res) => {
   res.render('registration');
 })
