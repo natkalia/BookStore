@@ -9,18 +9,18 @@ html(lang='en')
 
       include includes/header.pug
 
-        .content
-          main.mb-5.box.text-left(style="font-size: 1.5rem")
-            h2.my-5 User profile of: 
-              span.font-weight-bold #{name}
-            p Your mail: #{email}
-            if (isEditor)
-              p You are Editor. Awesome!
-            else 
-              p You aren't editor yet.
-            h3.my-3 Your reviews:
-            //- place for list of review books
-            //- from router.get(/profile)
+      .content
+        main.mb-5.box.text-left(style="font-size: 1.5rem")
+          h2.my-5 User profile of: 
+            span.font-weight-bold #{name}
+          p Your mail: #{email}
+          if (isEditor)
+            p You are Editor. Awesome!
+          else 
+            p You aren't editor yet.
+          h3.my-3 Your reviews:
+          //- place for list of review books
+          //- from router.get(/profile)
 
-      include ./footer.pug
+      include includes/footer.pug
     include includes/external-scripts.pug

@@ -131,7 +131,7 @@ span.badge {
   }
 }
 
-/* Content */
+/* Content cards */
 .card {
   border-color: var(--color-card);
   min-height: 150px;
@@ -140,6 +140,11 @@ span.badge {
 .card-header {
   background-color: var(--color-card);
   border-color: var(--color-card);
+}
+
+.card-footer {
+  background-color: unset;
+  border-top: none;
 }
 
 /* Books styles */

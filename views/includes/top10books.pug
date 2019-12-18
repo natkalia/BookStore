@@ -6,9 +6,9 @@ section.content
       each bookItem in top10books
         .col-md-6.col-lg-4.pb-3
           .card.w-100.h-100.border-info
-            .card-header.h5 #{bookItem.book.title}
+            .card-header #{bookItem.book.author}
             .card-body 
-              p.card-text #{bookItem.book.author}
+              h5.card-title #{bookItem.book.title}
               p.card-text #{bookItem.avarageNote}
             .card-footer
               a(href='/api/books/' + bookItem.book._id).btn.btn-info More...
