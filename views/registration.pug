@@ -15,7 +15,8 @@ block user-form
       label Email:
       input.form-control(name='email', type='email', placeholder='Enter your email', required)
     div.form-group
-      label Password:
+      label Password 
+        small (min. 8 characters and at least one upper case and lower case letter, number and special character)
       input.form-control(name='password', type='password', placeholder='Enter your password', required)
     input.btn.btn-info.my-4(type='submit', value='SIGN UP')
   p.text-left.m-4: | If you are already registered go to #[a.text-info(href="/api/auth") login] page.
