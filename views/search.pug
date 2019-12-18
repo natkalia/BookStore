@@ -16,9 +16,9 @@ html(lang='en')
             each book in books
               .col-md-6.col-lg-4.pb-3
                 .card.w-100.h-100.border-info
-                  .card-header.h5 #{book.title}
+                  .card-header #{book.author}
                   .card-body 
-                    p.card-text #{book.author}
+                    h5.card-title #{book.title}
                   .card-footer
                     a(href='/api/books/'+ book._id).btn.btn-info More...
 
