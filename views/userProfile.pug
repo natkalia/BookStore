@@ -1,19 +1,13 @@
 doctype html
-html(lang="en")
-  head
-    meta(charset=UTF - 8)
-    title Books
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO", crossorigin="anonymous")
-    link(href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Abril+Fatface|Proza+Libre:400,700&display=swap&subset=latin-ext", rel="stylesheet")
-    style
-      include ./style.css
-  body.text-dark
-    .wrapper
-      .wrapper-inner.bg-light
-        include ./dashboard.pug
+html(lang='en')
+  include includes/head.pug
+  include includes/head.pug
+  body.text-dark.wrapper
+    div.bg-light.container
 
-        include ./header.pug
+      include includes/dashboard.pug
+
+      include includes/header.pug
 
         .content
           main.mb-5.box.text-left(style="font-size: 1.5rem")
@@ -28,4 +22,5 @@ html(lang="en")
             //- place for list of review books
             //- from router.get(/profile)
 
-        include ./footer.pug
+      include ./footer.pug
+    include includes/external-scripts.pug
