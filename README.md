@@ -63,7 +63,16 @@ npm start
 * dotenv, config
 * bcryptjs, jsonwebtoken
 * cookies handling: cookie-parser
-* error handling: connect-flash, express-messages, express-session
+* errors handling: connect-flash, express-messages, express-session
+
+### Main features:
+* CRUD for books
+* user registration and login (authentication)
+* editor with additional permissions (authorization)
+* form handling (book: add & edit, user: registration & login)
+* delete book handling
+* top 10 books (key: descending ratings)
+* search engine (key: author or book title)
 
 ## :busts_in_silhouette: Authors
 * **adamsobiesak** - check at [Github](https://github.com/adamsobiesak)
