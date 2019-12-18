@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const { Book, validateBook, validateComment } = require('../models/book');
 const { checkAuthenticated } = require('../middleware/auth');
-const { checkEditor } = require('../middleware/editor');
 
 // Book add form
-router.get('/add', checkAuthenticated, checkEditor, async (req, res) => {
+router.get('/add', checkAuthenticated, async (req, res) => {
 
+  const { name, isEditor, user } = res.locals;
   console.log('name from middleware', res.locals.name);
   console.log('editor from middleware', res.locals.isEditor);
-  const { name, isEditor, user } = res.locals;
+
+  if (!isEditor) return res.status(401).send('Only editor can do that!');
 
   res.render('addBookForm', {
     name: name,
@@ -20,6 +21,7 @@ router.get('/add', checkAuthenticated, checkEditor, async (req, res) => {
 
 // Add book
 router.post('/add', async (req, res) => {
+
   const { error } = validateBook(req.body)
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -78,10 +80,9 @@ router.get('/:id', checkAuthenticated, async (req, res) => {
 
 //Delete book
 router.delete('/:id', checkAuthenticated, async (req, res) => {
-  // const { isEditor } = res.locals;
-  // console.log('from delete book editor state:', isEditor);
 
-  // if (!isEditor) return res.status(401).send('Only editor can do that!');
+  const { isEditor } = res.locals;
+  if (!isEditor) return res.status(401).send('Only editor can do that!');
     
   const book = await Book.findByIdAndRemove(req.params.id);
   if (!book) return res.status(404).send('The book with the given ID was not found'); 
@@ -91,8 +92,9 @@ router.delete('/:id', checkAuthenticated, async (req, res) => {
 
 //Edit book form
 router.get('/edit/:id', checkAuthenticated, async (req, res) => {
-  // const { isEditor } = res.locals;
-  // if (!isEditor) return res.status(401).send('Only editor can do that!');
+ 
+  const { isEditor } = res.locals;
+  if (!isEditor) return res.status(401).send('Only editor can do that!');
 
   const book = await Book.findById(req.params.id);
 
@@ -104,7 +106,11 @@ router.get('/edit/:id', checkAuthenticated, async (req, res) => {
 });
 
 // Edit book
-router.post('/edit/:id', async (req, res) => {
+router.post('/edit/:id', checkAuthenticated, async (req, res) => {
+
+  const { isEditor } = res.locals;
+  if (!isEditor) return res.status(401).send('Only editor can do that!');
+
   const { error } = validateBook(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -123,7 +129,11 @@ router.post('/edit/:id', async (req, res) => {
 });
 
 // Add comment and ratings
-router.post('/:id', async (req, res) => {
+router.post('/:id', checkAuthenticated, async (req, res) => {
+
+  const { user } = res.locals;
+  if (!user) return res.status(401).send('Only logged in users can do that!');
+
   const book = await Book.findById(req.params.id);
   if (!book) return res.status(404).send('The book with the given ID was not found');
 
@@ -144,6 +154,5 @@ router.post('/:id', async (req, res) => {
 
   res.redirect('/api/books/'+ book._id);
 });
-
 
 module.exports = router;

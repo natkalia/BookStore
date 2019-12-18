@@ -13,7 +13,6 @@ const auth = require('./routes/auth');
 const users = require('./routes/users');
 const search = require('./routes/search');
 const { checkAuthenticated } = require('./middleware/auth');
-const { checkEditor} = require('./middleware/editor');
 
 const app = express();
 
@@ -46,8 +45,7 @@ if (app.get('env') === 'development') {
   basicDebug('Morgan enabled...')
 }
 app.use(express.static('public'));
-app.use('/api/books', checkAuthenticated, books);
-app.use('/api/add', checkEditor);
+app.use('/api/books', books);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
 app.use('/api/search', checkAuthenticated, search);
