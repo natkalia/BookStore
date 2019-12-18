@@ -86,6 +86,10 @@ npm start
 * **Kombajn27** - check at [Github](https://github.com/Kombajn27)
 * **natkalia** - check at [Github](https://github.com/natkalia)
 
+## :notebook: To improve
+* create relation review - user name
+* errors handling related to id not found (status: 404)
+
 ## :green_book: Credits
 * background image [Unsplash](https://unsplash.com/)
 * books descriptions [Wikipedia](https://en.wikipedia.org/)
