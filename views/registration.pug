@@ -6,7 +6,8 @@ block title
 block dashboard-message
   | Register today to get access to rating and reviewing books!
 
-block user-form  
+block user-form
+  != messages('messages', locals)  
   form(method='POST', action='/api/users')
     div.form-group
       label Name:

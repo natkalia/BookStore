@@ -22,7 +22,6 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 })
 
-
 router.get('/:id', async (req, res) => {
   const userData = await User.findById(req.params.id);
   console.log(userData);
@@ -38,16 +37,21 @@ router.get('/:id', async (req, res) => {
 
 // Register new user
 router.post('/', async (req, res) => {
-    const {
-        error
-    } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+  const {
+      error
+  } = validate(req.body);
 
-    let user = await User.findOne({
-        email: req.body.email
-    })
-    if (user) return res.status(400).send('User already registered');
+  let user = await User.findOne({
+      email: req.body.email
+  });
 
+  if (error) {
+    req.flash('danger', `${error.details[0].message}`);
+    return res.status(400).redirect('/api/users');
+  } else if (user) {
+    req.flash('danger', 'User already registered');
+    return res.status(400).redirect('/api/users');
+  } else {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -59,12 +63,13 @@ router.post('/', async (req, res) => {
 
     await user.save();
 
-  // const expiration = process.env.DB_ENV === 'testing' ? 100 : 604800000;
-  const token = user.generateAuthToken();
-  console.log('token from user creation:', token);
+    // const expiration = process.env.DB_ENV === 'testing' ? 100 : 604800000;
+    const token = user.generateAuthToken();
+    console.log('token from user creation:', token);
 
-  res.cookie('token', token);
-  res.redirect('/');
+    res.cookie('token', token);
+    res.redirect('/');
+  }
 });
 
 module.exports = router;

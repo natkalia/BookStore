@@ -1,0 +1,24 @@
+doctype html
+html(lang='en')
+  include includes/head.pug
+  body.text-dark.wrapper
+    div.bg-light.container
+
+      include includes/dashboard.pug
+
+      include includes/header.pug
+
+      div.container
+        div.row
+          div.col-md-12
+            div
+              h2.mb-3.mt-4 Ooops!
+              h3.mb-3 Page not found
+            div
+              a(href="/" class="btn btn-primary btn-lg mb-4")
+                span.glyphicon.glyphicon-home Take me home
+
+      include includes/footer.pug
+
+    include includes/external-scripts.pug
+
