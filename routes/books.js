@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Book, validateBook, validateComment } = require('../models/book');
+const { checkAuthenticated } = require('../middleware/auth');
 const mongoose = require('mongoose');
 
 // Book add form

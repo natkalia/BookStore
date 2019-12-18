@@ -10,6 +10,10 @@ const {
     checkNotAuthenticated
 } = require("../middleware/auth");
 
+const {
+  checkAuthenticated
+} = require("../middleware/auth");
+
 router.get('/',
 // checkNotAuthenticated, 
 (req, res) => {
@@ -19,6 +23,22 @@ router.get('/',
 router.get('/logout', (req, res) => {
   res.clearCookie('token');
   res.redirect('/');
+})
+
+
+router.get('/:id', async (req, res) => {
+  // const user_id = res.locals.user._id;
+  // console.log(user_id);
+  const userData = await User.findById(req.params.id);
+  console.log(userData);
+  const user = userData;
+  const { name, email, isEditor } = userData;
+  res.render("userProfile", {
+    user: user,
+    name: name,
+    email: email,
+    isEditor: isEditor
+  });
 })
 
 // Register new user

@@ -26,10 +26,10 @@ router.get('/', checkAuthenticated, async (req, res) => {
 
   console.log('name from middleware', res.locals.name);
   console.log('editor from middleware', res.locals.isEditor);
-  const { name, isEditor } = res.locals;
+  const { name, isEditor, user } = res.locals;
 
   res.render('main', {
-    name: name, isEditor: isEditor, top10books: top10books
+    name: name, isEditor: isEditor, user: user, top10books: top10books
   });
 });
 
