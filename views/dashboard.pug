@@ -1,6 +1,6 @@
 //- variables transferred from index.js
-#{name}
-#{isEditor}
+//- #{name}
+//- #{isEditor}
 
 if(!name)
     nav.nav.justify-content-end.align-items-center
@@ -18,10 +18,10 @@ else if(isEditor === false)
         a(href='/').display-4.logo.flex-grow-1.text-left.text-dark.p-4 BooksApp
         ul.nav.justify-content-between.mr-3
             li.nav-item.btn.btn-warning.mr-2
-                a(href='#').nav-link.font-weight-bold.text-dark My profile
+                a(href='/api/users/' + user._id).nav-link.font-weight-bold.text-dark My profile
             li.nav-item.btn.btn-warning.mr-2
-                a(href='#').nav-link.font-weight-bold.text-dark Sign out
-    p.text-right.mr-4.mb-0.font-weight-bold Hello #{name}! You are now logged in as a
+                a(href='/api/users/logout').nav-link.font-weight-bold.text-dark Sign out
+    p.text-right.mr-4.mb-0.font-weight-bold Hello #{name || 'Default name'}! You are now logged in as a
        span.badge.badge-success.ml-2 Reader
     p.text-right.mr-4.mt-2 Users with Editor's status can edit books. Contact us if you are interested!
 
@@ -30,10 +30,9 @@ else if(isEditor === true)
         a(href='/').display-4.logo.flex-grow-1.text-left.text-dark.p-4 BooksApp
         ul.nav.justify-content-between.mr-3
             li.nav-item.btn.btn-warning.mr-2
-                a(href='#').nav-link.font-weight-bold.text-dark My profile
+                a(href='/api/users/' + user._id).nav-link.font-weight-bold.text-dark My profile
             li.nav-item.btn.btn-warning.mr-2
-                a(href='#').nav-link.font-weight-bold.text-dark Sign out
-    p.text-right.mr-4.mb-0.font-weight-bold Hello #{name}! You are now logged in as an
-       span.badge.badge-success.ml-2 Reader
+                a(href='/api/users/logout').nav-link.font-weight-bold.text-dark Sign out
+    p.text-right.mr-4.mb-0.font-weight-bold Hello #{name || 'Default name'}! You are now logged in as an
        span.badge.badge-danger.ml-2 Editor
     p.text-right.mr-4.mt-2 Thanks for your support to the BooksApp community!

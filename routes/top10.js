@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { Book } = require('../models/book');
+const { checkAuthenticated } = require('../middleware/auth');
 
 //Top10 books
-router.get('/', async (req, res) => {
+router.get('/', checkAuthenticated, async (req, res) => {
   const books = await Book.find();
   if (!books) return res.status(404).send('There are no books found');
 
@@ -23,9 +24,13 @@ router.get('/', async (req, res) => {
   sortedBooks.sort((a, b) => b.avarageNote - a.avarageNote);
   top10books = sortedBooks.slice(0, 11);
 
+  console.log('name from middleware', res.locals.name);
+  console.log('editor from middleware', res.locals.isEditor);
+  const { name, isEditor, user } = res.locals;
+
   res.render('main', {
-    name: "Hard-Coded-Indexjs-Name", isEditor: true, top10books: top10books
-  })
+    name: name, isEditor: isEditor, user: user, top10books: top10books
+  });
 });
 
 

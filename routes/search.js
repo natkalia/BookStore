@@ -31,7 +31,12 @@ router.post("/", async (req, res) => {
 
   if (!books) return res.status(404).send("There are no books found");
 
+  const { name, isEditor, user } = res.locals;
+  
   res.render("search", {
+    name: name,
+    isEditor: isEditor,
+    user: user,
     numberOfBooks: numberOfBooks,
     books: books
   });
