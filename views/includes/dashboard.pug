@@ -1,0 +1,32 @@
+nav.navbar.navbar-expand-sm.navbar-light.pb-3
+  include ./navbar-button-logo.pug
+
+  .collapse.navbar-collapse.justify-content-end.collapse.multi-collapse
+    ul.navbar-nav
+      if (!name)
+        li.nav-item.ml-sm-3
+          a.btn.btn-warning(href="/api/auth").nav-link.font-weight-bold.text-dark Login
+        li.nav-item.ml-sm-3
+          a.btn.btn-warning(href="/api/users").nav-link.font-weight-bold.text-dark Register
+
+      else
+        li.nav-item.ml-sm-3
+          a.btn.btn-warning(href='/api/users/' + user._id).nav-link.font-weight-bold.text-dark My profile
+        li.nav-item.ml-sm-3
+          a.btn.btn-warning(href="/api/users/logout").nav-link.font-weight-bold.text-dark Log out
+
+.dashboard.divider.pt-2.px-3.collapse.multi-collapse
+  .text-left.text-md-right
+    if (!name)
+      p.mb-0.font-weight-bold Hey, logged-in users can do more!
+      p.mt-2.font-italic.text-smaller Register today to get access to rating and reviewing books!
+
+    else if (isEditor === false)
+      p.mb-0.font-weight-bold Hello #{name || 'Default name'}! You are now logged in as a
+        span.badge.badge-success.ml-2.p-2 Reader
+      p.mt-2.font-italic.text-smaller Users with Editor's status can edit books. Contact us if you are interested!
+
+    else if (isEditor === true)
+      p.mb-0.font-weight-bold Hello #{name || 'Default name'}! You are now logged in as a
+        span.badge.badge-danger.ml-2.p-2 Editor
+      p.mt-2.font-italic.text-smaller Thanks for your support to the BooksApp community!

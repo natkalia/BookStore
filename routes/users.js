@@ -10,9 +10,6 @@ const {
     checkNotAuthenticated
 } = require("../middleware/auth");
 
-const {
-  checkAuthenticated
-} = require("../middleware/auth");
 
 router.get('/',
 // checkNotAuthenticated, 
@@ -27,8 +24,6 @@ router.get('/logout', (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-  // const user_id = res.locals.user._id;
-  // console.log(user_id);
   const userData = await User.findById(req.params.id);
   console.log(userData);
   const user = userData;

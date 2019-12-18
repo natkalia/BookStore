@@ -1,36 +1,25 @@
 doctype html
-html(lang='en')
-  head
-    meta(charset=UTF-8)
-    title Books | 
-      block title
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
-    link(href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Abril+Fatface|Proza+Libre:400,700&display=swap&subset=latin-ext", rel='stylesheet')
-    style
-      include ./style.css
-  body.text-dark
+html(lang="en")
+  include includes/head.pug
+  body.text-dark.wrapper
+    .bg-light.container
+      nav.navbar
+        a.navbar-brand.logo.text-dark(href="/") BooksApp
+      p.text-left.px-3.pt-3.mt-2.mb-4.divider.text-right.font-weight-bold(style="position: relative")
+        block dashboard-message
 
-    div.wrapper
+      .content
+        hr
+        main.mb-5.box
+          h2.my-5.bg-info.text-white.py-3
+            block title
 
-      div.wrapper-inner.bg-light
+          if errors
+            .alert.alert-danger.mx-5.mb-5.text-left
+              each error in errors
+                div= error
 
-        nav.nav.justify-content-end.align-items-center
-          a(href='/').display-4.logo.flex-grow-1.text-left.text-dark.p-4 BooksApp
-        p.text-left.mx-4.mt-2.mb-4 
-          block dashboard-message
+          block user-form
 
-        div.content
-          hr
-          main.mb-5
-            h2.my-5 
-              block title
-              
-            if errors
-              .alert.alert-danger.mx-5.mb-5.text-left
-                each error in errors
-                  div=error                    
-
-            block user-form
-
-        include ./footer.pug
+      include includes/footer.pug
+    include includes/external-scripts.pug
