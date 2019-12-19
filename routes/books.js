@@ -55,7 +55,10 @@ router.get('/', checkAuthenticated, async (req, res) => {
 
 //Book view
 router.get('/:id', checkAuthenticated, async (req, res) => {
-  const book = await Book.findById(req.params.id);
+  const book = await Book.findOne({
+    _id: req.params.id
+  }).populate('reviewsList.user', 'name-_id')
+
   if (!book) return res.status(404).send('The book with the given ID was not found');
 
   let sum = 0;
@@ -65,8 +68,6 @@ router.get('/:id', checkAuthenticated, async (req, res) => {
   const calculation = (sum / book.reviewsList.length).toFixed(2);
   const averageStars = isNaN(calculation) ? 'Waiting for your comment' : calculation;
 
-  console.log('name from middleware', res.locals.name);
-  console.log('editor from middleware', res.locals.isEditor);
   const { name, isEditor, user } = res.locals;
 
   res.render('bookView', {
@@ -146,8 +147,8 @@ router.post('/:id', checkAuthenticated, async (req, res) => {
   book.reviewsList.unshift({
     comment: req.body.comment,
     stars: req.body.stars,
-    date: `${dateNow} ${timeNow}`
-    //user: req.body.user_id -> it should be added from token (auth middleware)
+    date: `${dateNow} ${timeNow}`,
+    user: user._id
   });
 
   await book.save();
