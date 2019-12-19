@@ -149,15 +149,20 @@ router.post('/:id', checkAuthenticated, async (req, res) => {
   const { error } = validateComment(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const dateNow = new Date().toLocaleDateString();
-  const timeNow = new Date().toLocaleTimeString();
+  if (error) {
+    req.flash('danger', `${error.details[0].message}`);
+    return res.status(400).redirect(`/api/books/${req.params.id}`);
+  } else {
+    const dateNow = new Date().toLocaleDateString();
+    const timeNow = new Date().toLocaleTimeString();
 
-  book.reviewsList.unshift({
-    comment: req.body.comment,
-    stars: req.body.stars,
-    date: `${dateNow} ${timeNow}`,
-    user: user._id
-  });
+    book.reviewsList.unshift({
+      comment: req.body.comment,
+      stars: req.body.stars,
+      date: `${dateNow} ${timeNow}`,
+      user: user._id
+    });
+  }  
 
   await book.save();
 
