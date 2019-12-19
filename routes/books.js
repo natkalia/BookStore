@@ -7,42 +7,44 @@ const { checkAuthenticated } = require('../middleware/auth');
 router.get('/add', checkAuthenticated, async (req, res) => {
 
   const { name, isEditor, user } = res.locals;
-  console.log('name from middleware', res.locals.name);
-  console.log('editor from middleware', res.locals.isEditor);
 
-  if (!isEditor) return res.status(401).send('Only editor can do that!');
-
-  res.render('addBookForm', {
-    name: name,
-    isEditor: isEditor, 
-    user: user
-  });
+  if (!isEditor) {
+    req.flash('danger', 'Only editor can do that!');
+    return res.status(401).redirect('/api/books');
+  } else {
+    res.render('addBookForm', {
+      name: name,
+      isEditor: isEditor, 
+      user: user
+    });
+  }
 });
 
 // Add book
 router.post('/add', async (req, res) => {
 
   const { error } = validateBook(req.body)
-  if (error) return res.status(400).send(error.details[0].message);
-
-  const book = new Book({
-    title: req.body.title,
-    author: req.body.author,
-    publishingYear: req.body.publishingYear,
-    category: req.body.category,
-    description: req.body.description
-  });
-  await book.save();
-
-  res.redirect('/api/books');
+  if (error) {
+    req.flash('danger', `${error.details[0].message}`);
+    return res.status(400).redirect('/api/books/add');
+  } else {
+    const book = new Book({
+      title: req.body.title,
+      author: req.body.author,
+      publishingYear: req.body.publishingYear,
+      category: req.body.category,
+      description: req.body.description
+    });
+    await book.save();
+  
+    res.redirect('/api/books');
+  }
 });
 
 // Books list
 router.get('/', checkAuthenticated, async (req, res) => {
   const books = await Book.find().sort('title');
 
-  console.log('name from middleware', res.locals.name);
-  console.log('editor from middleware', res.locals.isEditor);
   const { name, isEditor, user } = res.locals;
 
   res.render('booksList', {
@@ -53,11 +55,9 @@ router.get('/', checkAuthenticated, async (req, res) => {
   });
 });
 
-//Book view
+// Book view
 router.get('/:id', checkAuthenticated, async (req, res) => {
-  const book = await Book.findOne({
-    _id: req.params.id
-  }).populate('reviewsList.user', 'name-_id')
+  const book = await Book.findOne({_id: req.params.id}).populate('reviewsList.user', 'name-_id')
 
   if (!book) return res.status(404).send('The book with the given ID was not found');
 
@@ -79,31 +79,35 @@ router.get('/:id', checkAuthenticated, async (req, res) => {
   });
 });
 
-//Delete book
+// Delete book
 router.delete('/:id', checkAuthenticated, async (req, res) => {
 
   const { isEditor } = res.locals;
   if (!isEditor) return res.status(401).send('Only editor can do that!');
-    
+  
   const book = await Book.findByIdAndRemove(req.params.id);
   if (!book) return res.status(404).send('The book with the given ID was not found'); 
 
   res.send('Success. You delete the book.');
-})
+});
 
-//Edit book form
+// Edit book form
 router.get('/edit/:id', checkAuthenticated, async (req, res) => {
  
   const { isEditor } = res.locals;
-  if (!isEditor) return res.status(401).send('Only editor can do that!');
 
-  const book = await Book.findById(req.params.id);
-
-  if (!book) return res.status(404).send('The book with the given ID was not found');
-
-  res.render('editBookForm', {
-    book: book
-  });
+  if (!isEditor) {
+    req.flash('danger', 'Only editor can do that!');
+    return res.status(401).redirect(`/api/books/${req.params.id}`);
+  } else {
+    const book = await Book.findById(req.params.id);
+  
+    if (!book) return res.status(404).send('The book with the given ID was not found');
+  
+    res.render('editBookForm', {
+      book: book
+    });
+  }
 });
 
 // Edit book
@@ -113,20 +117,24 @@ router.post('/edit/:id', checkAuthenticated, async (req, res) => {
   if (!isEditor) return res.status(401).send('Only editor can do that!');
 
   const { error } = validateBook(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
 
-  const book = await Book.findByIdAndUpdate(req.params.id,
-    {
-      title: req.body.title,
-      author: req.body.author,
-      publishingYear: req.body.publishingYear,
-      category: req.body.category,
-      description: req.body.description
-    }
-  );
-  if (!book) return res.status(404).send('The book with the given ID was not found');
-
-  res.redirect('/api/books/'+ book._id);
+  if (error) {
+    req.flash('danger', `${error.details[0].message}`);
+    return res.status(400).redirect(`/api/books/edit/${req.params.id}`);
+  } else {
+    const book = await Book.findByIdAndUpdate(req.params.id,
+      {
+        title: req.body.title,
+        author: req.body.author,
+        publishingYear: req.body.publishingYear,
+        category: req.body.category,
+        description: req.body.description
+      }
+    );
+    if (!book) return res.status(404).send('The book with the given ID was not found');
+  
+    res.redirect('/api/books/'+ book._id);
+  };
 });
 
 // Add comment and ratings

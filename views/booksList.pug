@@ -9,10 +9,10 @@ html(lang='en')
       include includes/header.pug
 
       div.content
+        != messages('messages', locals)
         main.px-3.py-5
           .box
-            h2.bg-info.text-white.py-3.mb-3 Books list
-            a.btn.btn-danger.btn-lg.my-3(href='/api/books/add') Add new book
+            h2.bg-info.text-white.py-3.mb-5 Books list
           div.row
             each book, i in books
               .col-md-6.col-lg-4.pb-3
