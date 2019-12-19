@@ -39,6 +39,7 @@ DEBUG=app:startup,app:db
 DEBUG_COLORS=true
 DEBUG_FD=1
 JWT_PRIVATEKEY=your secret jwt key
+SESSION_SECRET=your secret session key
 ```
 
 4. Run developer server
@@ -87,7 +88,6 @@ npm start
 * **natkalia** - check at [Github](https://github.com/natkalia)
 
 ## :notebook: To improve
-* create relation review - user name
 * errors handling related to id not found (status: 404)
 
 ## :green_book: Credits
