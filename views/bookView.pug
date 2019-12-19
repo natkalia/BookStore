@@ -42,12 +42,13 @@ html(lang="en")
             h3.box.bg-grey.mb-3.py-3.text-white Readers opinions:
             .card-columns.opinions.px-3
               each comment, i in book.reviewsList
-                .card.mb-2.border-info
+                - var name = (comment.user ? comment.user.name : "Anonymous")
+                 .card.mb-2.border-info
                   .card-header.p-1.text-left.border-info= comment.date
                   .card-body.row
                     .col-8.text-left.border-right
                       p.font-italic= comment.comment
-                      p.font-weight-bold Anonymous user
+                      p.font-weight-bold #{name}
                     .col-4
                       p User rating:
                       p.font-weight-bold(style="font-size: 24px")= comment.stars
