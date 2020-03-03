@@ -1,0 +1,23 @@
+doctype html
+html(lang='en')
+  include includes/head.pug
+  include includes/head.pug
+  body.text-dark.wrapper
+    div.bg-light.container
+
+      include includes/dashboard.pug
+
+      include includes/header.pug
+
+      .content
+        main.mb-5.box.text-left(style="font-size: 1.5rem")
+          h2.my-5 User profile of: 
+            span.font-weight-bold #{name}
+          p Your mail: #{email}
+          if (isEditor)
+            p You are Editor. Awesome!
+          else 
+            p You aren't editor yet.
+            
+      include includes/footer.pug
+    include includes/external-scripts.pug

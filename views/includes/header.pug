@@ -1,0 +1,14 @@
+header.bg-info
+  .headline.px-3.pt-4.pb-2
+    h2.display-4 Let's talk about books
+    p Check this great tool for organizing and rating books!
+  .search-books.py-lg-5.px-3.bg-dark
+    .d-flex.flex-column.justify-content-center.bg-light.border.all-books.px-3.px-lg-0.mx-n3.mx-lg-0
+      a(href="/api/books").text-dark Get all books!
+    .justify-content-lg-center.row.py-3.py-lg-0
+      form(method="POST", action="/api/search").py-2.input-group.input-group-lg.col-lg-7
+        input.form-control(placeholder="Search titles/authors...", aria-label="Search term", aria-describedby="button-search-all", name="term", type="text")
+        .input-group-append
+          button#button-search-all.btn.btn-warning.font-weight-bold(, type="submit", value="search")
+            i.fas.fa-search.d-block.d-sm-none
+            span.d-none.d-sm-inline Search all books

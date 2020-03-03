@@ -1,0 +1,58 @@
+doctype html
+html(lang="en")
+  include includes/head.pug
+  include includes/head.pug
+  body.text-dark.wrapper
+    .bg-light.container
+      include includes/dashboard.pug
+
+      include includes/header.pug
+
+      .content
+        != messages('messages', locals)
+        hr
+        main
+          .box
+            a.mb-4.mr-2.btn.btn-warning(href='/api/books/edit/' + book._id) Edit book
+            a.mb-4.btn.btn-danger.deleteBook(href="#", data-id=book._id) Delete book
+            h2.bg-info.text-white.py-3= book.title
+            h5.mb-5= book.author
+            .box.book-details.text-left
+              p Publication year:
+                span= book.publishingYear
+              p Category:
+                span= book.category
+              p Rating:
+                span= averageStars
+            p.text-left.mt-4.font-weight-bold Book description:
+            p.text-justify.font-italic= book.description
+          hr
+          .box
+            h3.bg-grey.text-white.py-3 Add your comment and rating
+            form(method="POST", action='/api/books/' + book._id)
+              .form-group
+                label Write your comment:
+                textarea.form-control(name="comment", rows="5", placeholder="Enter book comment")
+              .form-group
+                label Your rating (from 0 to 5):
+                input.form-control(name="stars", type="number", min="0", max="5", placeholder="0")
+              input.btn.btn-info(type="submit", value="Add comment")
+          hr
+          div
+            h3.box.bg-grey.mb-3.py-3.text-white Readers opinions:
+            .card-columns.opinions.px-3
+              each comment, i in book.reviewsList
+                - var name = (comment.user ? comment.user.name : "Anonymous")
+                 .card.mb-2.border-info
+                  .card-header.p-1.text-left.border-info= comment.date
+                  .card-body.row
+                    .col-8.text-left.border-right
+                      p.font-italic= comment.comment
+                      p.font-weight-bold #{name}
+                    .col-4
+                      p User rating:
+                      p.font-weight-bold(style="font-size: 24px")= comment.stars
+      hr
+      include includes/footer.pug
+    include includes/external-scripts.pug
+    script(src="/main.js")

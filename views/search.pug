@@ -1,0 +1,26 @@
+doctype html
+html(lang='en')
+  include includes/head.pug
+  include includes/head.pug
+  body.text-dark.wrapper
+    div.bg-light.container
+
+      include includes/dashboard.pug
+
+      include includes/header.pug
+
+      section.content
+        div.p-5
+          h2.pb-4 We found #{numberOfBooks} matching book(s) based on your search
+          .row.justify-content-center
+            each book in books
+              .col-md-6.col-lg-4.pb-3
+                .card.w-100.h-100.border-info
+                  .card-header #{book.author}
+                  .card-body 
+                    h5.card-title #{book.title}
+                  .card-footer
+                    a(href='/api/books/'+ book._id).btn.btn-info More...
+
+      include includes/footer.pug
+    include includes/external-scripts.pug

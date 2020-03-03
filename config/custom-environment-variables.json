@@ -1,0 +1,10 @@
+{
+  "db": {
+    "user": "DB_USER",
+    "password": "DB_PASSWORD",
+    "address": "DB_DATABASE_ADDRESS",
+    "name": "DB_DATABASE_NAME",
+    "jwtPrivateKey": "JWT_PRIVATEKEY"
+  },
+  "session_secret": "SESSION_SECRET"
+}

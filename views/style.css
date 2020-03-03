@@ -1,0 +1,217 @@
+:root {
+  --divider: linear-gradient(90deg, rgba(2, 0, 36, 0) 0%, rgba(88, 88, 103, 1) 30%, rgba(88, 88, 103, 1) 60%, rgba(0, 212, 255, 0) 100%);
+  --color-light-grey: rgb(118, 120, 121);
+  --color-card: rgba(23, 162, 184, 0.11);
+}
+
+/* General */
+body {
+  text-align: center;
+  height: 100vh;
+  font-family: "Proza Libre", cursive;
+}
+
+.wrapper {
+  background-image: url(https://images.unsplash.com/photo-1554896541-dff010081afe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: repeat;
+}
+
+.wrapper > .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media screen and (min-width: 1200px) {
+  .wrapper > .container {
+    max-width: 1024px;
+  }
+}
+
+/* Helpers */
+.bg-grey {
+  background-color: var(--color-light-grey);
+}
+
+.divider::before {
+  background: rgb(2, 0, 36);
+  background: var(--divider);
+  content: "";
+  height: 2px;
+  left: 0;
+  position: absolute;
+  top: -2px;
+  width: 100%;
+}
+
+/* Nav */
+.logo {
+  font-family: "Abril Fatface", cursive;
+  font-size: 2rem;
+}
+
+.nav-item .btn {
+  margin-bottom: 0.5rem;
+}
+
+.nav-item:last-child .btn {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .logo {
+    font-size: 3rem;
+  }
+
+  .nav-item .btn {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+}
+
+/* Dashboard */
+
+.dashboard {
+  position: relative;
+}
+
+@media screen and (min-width: 576px) {
+  .dashboard {
+    display: block !important;
+  }
+}
+
+.text-smaller {
+  font-size: 0.95em;
+}
+
+span.badge {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+@media screen and (min-width: 768px) {
+  span.badge {
+    font-size: 1.25rem;
+  }
+}
+
+.nav ~ p {
+  font-size: 1.2rem;
+}
+
+/* Header */
+
+.headline > p {
+  font-size: 1.25rem;
+}
+
+.search-books {
+  font-size: 1.6rem;
+  position: relative;
+}
+
+.all-books {
+  --size: 100px;
+
+  height: var(--size);
+  position: relative;
+}
+
+@media screen and (min-width: 991px) {
+  .all-books {
+    --size: 200px;
+
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: calc(-.5 * var(--size));
+    width: var(--size);
+  }
+}
+
+/* Content cards */
+.card {
+  border-color: var(--color-card);
+  min-height: 150px;
+}
+
+.card-header {
+  background-color: var(--color-card);
+  border-color: var(--color-card);
+}
+
+.card-footer {
+  background-color: unset;
+  border-top: none;
+}
+
+/* Books styles */
+hr {
+  border: 2px solid white;
+}
+
+.box {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.box.book-details {
+  width: 80%;
+}
+
+@media screen and (min-width: 768px) {
+  .box.book-details {
+    width: 13rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .box {
+    width: 60%;
+  }
+}
+
+.book-details p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-details p span {
+  text-align: right;
+}
+
+.content {
+  min-height: 80vh;
+}
+
+.form-group {
+  width: 80%;
+  margin: 2% auto;
+  text-align: left;
+}
+
+/* Opinions */
+.card-columns.opinions {
+  column-count: 1;
+}
+
+
+.card-columns.opinions .card {
+  display: inline-block;
+  width: 90%;
+}
+
+/* @media screen and (min-width: 576px) {
+  .card-columns.opinions {
+    column-count: 2;
+  }
+} */
+
+/*
+@media screen and (min-width: 992px) {
+  .card-columns.opinions {
+    column-count: 3;
+  }
+} */

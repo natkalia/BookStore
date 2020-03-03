@@ -1,0 +1,14 @@
+section.content
+  .top-ten.px-3.py-5
+    .box  
+      h2.bg-info.text-white.py-3.mb-5 Top 10 books
+    .row.justify-content-center
+      each bookItem in top10books
+        .col-md-6.col-lg-4.pb-3
+          .card.w-100.h-100.border-info
+            .card-header #{bookItem.book.author}
+            .card-body 
+              h5.card-title #{bookItem.book.title}
+              p.card-text #{bookItem.avarageNote}
+            .card-footer
+              a(href='/api/books/' + bookItem.book._id).btn.btn-info More...

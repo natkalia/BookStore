@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+  include includes/head.pug
+  body.text-dark.wrapper
+    .bg-light.container
+      include includes/dashboard.pug
+
+      include includes/header.pug
+
+      .content
+        != messages('messages', locals)
+        hr
+        main.box
+          h2.bg-info.text-white.py-3.mb-5 Edit book
+          form(method="POST", action='/api/books/edit/' + book._id)
+            .form-group
+              label Title:
+              input.form-control(name="title", type="text", value=book.title)
+            .form-group
+              label Author:
+              input.form-control(name="author", type="text", value=book.author)
+            .form-group
+              label Publiction year:
+              input.form-control(name="publishingYear", type="number", value=book.publishingYear)
+            .form-group
+              label Category:
+              select(name="category").form-control
+                each val in ['Thriller', 'Crime fiction', 'Romance', 'For kids', 'Biography', 'Fantasy', 'Handbooks', 'Poetry', 'Travel', 'Non-fiction']
+                  option(value=val)= val
+            .form-group
+              label Description:
+              textarea.form-control(name="description", rows="5")= book.description
+            input.btn.btn-info(type="submit", value="Add changes")
+      hr
+      include includes/footer.pug
+
+    include includes/external-scripts.pug

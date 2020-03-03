@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+  include includes/head.pug
+  body.text-dark.wrapper
+    .bg-light.container
+      nav.navbar
+        a.navbar-brand.logo.text-dark(href="/") BooksApp
+      p.text-left.px-3.pt-3.mt-2.mb-4.divider.text-right.font-weight-bold(style="position: relative")
+        block dashboard-message
+
+      .content
+        hr
+        main.mb-5.box
+          h2.my-5.bg-info.text-white.py-3
+            block title
+
+          if errors
+            .alert.alert-danger.mx-5.mb-5.text-left
+              each error in errors
+                div= error
+
+          block user-form
+
+      include includes/footer.pug
+    include includes/external-scripts.pug

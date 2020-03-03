@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+  include includes/head.pug
+  body.text-dark.wrapper
+    div.bg-light.container
+
+      include includes/dashboard.pug
+
+      include includes/header.pug
+
+      div.content
+        != messages('messages', locals)
+        main.px-3.py-5
+          .box
+            h2.bg-info.text-white.py-3.mb-5 Books list
+          div.row
+            each book, i in books
+              .col-md-6.col-lg-4.pb-3
+                .card.w-100.h-100.border-info
+                  div.card-header= book.author
+                  div.card-body
+                    h5.card-title= book.title
+                  div.card-footer
+                    a.btn.btn-info(href='/api/books/'+ book._id) Read more
+
+      include includes/footer.pug
+
+    include includes/external-scripts.pug
